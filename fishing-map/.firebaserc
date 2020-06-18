@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "fishing-map-7b68b": {
+      "hosting": {
+        "fishing-map": [
+          "fishing-map-7b68b"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "fishing-map",
+      "public": "dist/fishing-map",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}
