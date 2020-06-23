@@ -6,11 +6,15 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MapComponent } from './components/map/map.component';
 import { AngularFireModule } from '@angular/fire';
-
+import { FormsModule } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { AngularMaterialModule } from './modules/angular-material/angular-material.module';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { StopPropagationDirective } from './directives/stop-propagation.directive';
+import { FirebaseModule } from './modules/firebase/firebase.module';
+
+import { MarkerDeatailComponent } from './components/marker-detail/marker-deatail.component';
+import { HomeComponent } from './components/home/home.component';
+import { EditmarkerComponent } from './components/editmarker/editmarker.component';
+
 
 
 
@@ -19,7 +23,10 @@ import { StopPropagationDirective } from './directives/stop-propagation.directiv
   declarations: [
     AppComponent,
     MapComponent,
-    StopPropagationDirective
+    MarkerDeatailComponent,
+    HomeComponent,
+    EditmarkerComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -27,7 +34,8 @@ import { StopPropagationDirective } from './directives/stop-propagation.directiv
     BrowserAnimationsModule,
     AngularMaterialModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule
+    FirebaseModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

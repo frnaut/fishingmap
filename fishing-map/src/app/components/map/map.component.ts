@@ -11,66 +11,68 @@ import { Marker } from 'src/app/models/marker.interface';
 export class MapComponent implements OnInit {
 
   map: leaflet.map;
-  markers: leaflet.marker[] = [];
+  markers: any[] = [];
 
   markerList: Marker [] = [];
 
   constructor( public _fbService : FirebaseService ) {
-   
     
   }
 
   ngOnInit(): void {
     
     this.mapa();
-    
+    this.newMarker(); 
     this._fbService.getMarkers().subscribe((resp: Marker[])=>{
+      
       this.markerList = resp;
       
       this.markerList.forEach(resp =>{ 
-        this.addMarker(resp.latitud,resp.longitud)
+        this.addMarker(resp.latitud,resp.longitud, resp.id)
         this.markerInMap();
       })
     })
-    
-  }
-
-  newMarker(event: Event): void{
-    debugger
-    
-    if(event.eventPhase != 0){
-      var marker: Marker = {
-        latitud: null,
-        longitud: null
-      }
-      
-  
-      this.map.on('click', e =>{
-        let latlng: { lat:number, lng:number } = this.map.mouseEventToLatLng(e.originalEvent);
         
-        marker.latitud = latlng.lat;
-        marker.longitud = latlng.lng;
-        console.log('**********')
-        console.log(event.eventPhase)
-        // console.log(marker)
-        // this._fbService.addMarkers(marker);
-      })
-    }
-    
-  }
-
-
-  addMarker( x: number, y: number ) : void{
-    let marker = leaflet.marker([x, y])
-    this.markers.push(marker) 
   }
 
   
+
+  editar(){
+    console.log('funciona')
+  }
+
   markerInMap() : void{
     this.markers.forEach((marker)=>{
       marker.addTo(this.map)
-      marker.bindPopup('Este es un marcador')
+      marker.bindPopup(`<a class="btn btn-success text-light" href="/edit/${marker.id}" > Editar </a>
+      <a class="btn btn-info text-light" href="/marker/${marker.id}" > Ver </a>
+      `)
+
     });
+  }
+
+  newMarker(): void{
+  
+    var marker: Marker = {
+      latitud: null,
+      longitud: null,
+      
+    }
+
+    this.map.on('click', e =>{
+      let latlng: { lat:number, lng:number } = this.map.mouseEventToLatLng(e.originalEvent);
+      
+      marker.latitud = latlng.lat;
+      marker.longitud = latlng.lng;
+      this._fbService.addMarkers(marker);
+    })
+  }
+
+
+  addMarker( x: number, y: number, id ) : void{
+    let marker = leaflet.marker([x, y])
+    marker.id = id;
+    this.markers.push(marker) 
   }
 
 

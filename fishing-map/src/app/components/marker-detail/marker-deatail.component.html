@@ -1,0 +1,25 @@
+<div class="mx-5 my-5">
+    <div>
+        <h1>{{ marker.titulo | uppercase  }}</h1>
+        <p>
+          {{ marker.descripcion | titlecase  }}
+        </p>
+
+        <div>
+          <span>Latitud: {{ marker.latitud }}</span>
+        </div>
+        <span>Latitud: {{ marker.longitud }}</span>
+    </div>
+
+    <div class="card-container mt-5">
+      <mat-toolbar color="primary">Galeria de imagenes</mat-toolbar>
+      <mat-card class="card mb-2" *ngFor="let img of marker.img">
+        <img mat-card-image [src]="img.file">
+       
+          <button class="mr-2" mat-raised-button color="primary">Ver</button>
+          <button mat-raised-button color="warn">Eliminar</button>
+       
+      </mat-card>
+
+    </div>
+</div>
