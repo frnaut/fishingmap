@@ -1,25 +1,72 @@
+<div class="d-flex justify-content-center" *ngIf="delete">
+  <div class="alert-d text-center">
+      Eliminado
+  </div>
+</div>
+
 <div class="mx-5 my-5">
     <div>
-        <h1>{{ marker.titulo | uppercase  }}</h1>
-        <p>
-          {{ marker.descripcion | titlecase  }}
-        </p>
+      <div>
+        
+        <div>
+          <h1 *ngIf="!marker.titulo">Titulo</h1>
+          <h1>{{ marker.titulo | uppercase  }}</h1>
+        </div>
+
+        <div>
+          <p *ngIf="!marker.descripcion">
+            Descripcion
+          </p>
+          <p>
+            {{ marker.descripcion | titlecase  }}
+          </p>
+        </div>
 
         <div>
           <span>Latitud: {{ marker.latitud }}</span>
         </div>
         <span>Latitud: {{ marker.longitud }}</span>
+      </div>
+     
+      <button [routerLink]="['/edit', marker.id]" class="btn-editar" mat-raised-button color="accent">
+        <mat-icon aria-hidden="false">edit</mat-icon>
+      </button>
+      
     </div>
 
     <div class="card-container mt-5">
-      <mat-toolbar color="primary">Galeria de imagenes</mat-toolbar>
-      <mat-card class="card mb-2" *ngFor="let img of marker.img">
-        <img mat-card-image [src]="img.file">
-       
-          <button class="mr-2" mat-raised-button color="primary">Ver</button>
-          <button mat-raised-button color="warn">Eliminar</button>
-       
-      </mat-card>
+      <mat-toolbar class="mb-2" color="primary">Galeria de imagenes</mat-toolbar>
 
+      
+        <mat-card class="card mx-1 my-1" *ngFor="let img of marker.img ; let i = index">
+          <div class="text-right mb-1">
+            <button mat-raised-button class="btn-delete" color="warn">
+              <mat-icon (click)="deleteImage(img.nombre, i, marker)" aria-hidden="false">delete</mat-icon>
+            </button>
+          </div>
+          <img class="mb-1" mat-card-image [src]="img.file">
+          <button (click)="openImages(img.file)" class="btn-block" mat-raised-button color="primary">
+            <mat-icon aria-hidden="false">panorama</mat-icon>
+          </button>
+        </mat-card>
+      
+       <div *ngIf="marker.img.length == 0" class="d-flex justify-content-center w-100">
+         <div class="alert text-center alert-warning w-50" role="alert">
+          <div>
+            <mat-icon aria-hidden="false">error</mat-icon>
+
+          </div>
+            No se encontraron imagenes
+         </div>
+       </div>
     </div>
+</div>
+
+<div *ngIf="open" class="viewer" id="image-viewer">
+  <div class="d-flex justify-content-end">
+    <button (click)="closeImage()" mat-raised-button class="btn-close" color="warn">
+      <mat-icon aria-hidden="false">close</mat-icon>
+    </button>
+  </div>
+  <img [src]="image" alt="">
 </div>

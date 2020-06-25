@@ -1,5 +1,5 @@
 .alert-d{
-    position: absolute;
+    position: fixed;
     width: 400px;
     top: 0px;
     background-color: #26292ec9;

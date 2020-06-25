@@ -14,6 +14,7 @@ import { FirebaseModule } from './modules/firebase/firebase.module';
 import { MarkerDeatailComponent } from './components/marker-detail/marker-deatail.component';
 import { HomeComponent } from './components/home/home.component';
 import { EditmarkerComponent } from './components/editmarker/editmarker.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 
@@ -26,6 +27,7 @@ import { EditmarkerComponent } from './components/editmarker/editmarker.componen
     MarkerDeatailComponent,
     HomeComponent,
     EditmarkerComponent,
+    SearchComponent,
     
   ],
   imports: [

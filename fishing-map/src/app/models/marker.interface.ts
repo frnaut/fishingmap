@@ -7,4 +7,5 @@ export interface Marker {
     titulo?: string;
     descripcion?: string;
     img?: ImageInteface[];
+    date?: Date;
 }

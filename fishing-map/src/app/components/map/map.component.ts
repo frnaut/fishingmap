@@ -56,7 +56,6 @@ export class MapComponent implements OnInit {
     var marker: Marker = {
       latitud: null,
       longitud: null,
-      
     }
 
     this.map.on('click', e =>{
@@ -64,6 +63,8 @@ export class MapComponent implements OnInit {
       
       marker.latitud = latlng.lat;
       marker.longitud = latlng.lng;
+      marker.img = [];
+      marker.titulo = "";
       this._fbService.addMarkers(marker);
     })
   }
@@ -79,12 +80,14 @@ export class MapComponent implements OnInit {
   mapa() : void {
     this.map = leaflet.map('map').setView([18.4359323, -69.9907653], 7);
 
-    leaflet.tileLayer('https://{s}.tile.openstreetmap.de/{z}/{x}/{y}.png', {
+    leaflet.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     maxZoom: 16,
     tileSize: 512,
     zoomOffset: -1,
     }).addTo(this.map);
   }
+  
+  // https://{s}.tile.openstreetmap.de/{z}/{x}/{y}.png	
 
 }

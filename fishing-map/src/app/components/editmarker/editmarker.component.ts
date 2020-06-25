@@ -43,19 +43,19 @@ export class EditmarkerComponent implements OnInit {
       this.img.mbProgres = (resp['bytesTransferred'] /1024) /1024;
       this.img.mbTotal = (resp['totalBytes'] /1024) /1024;
       const url = resp['ref'].location.path;
-  
+      
 
       if(this.img.mbProgres == this.img.mbTotal){
 
         setTimeout(()=>{
           this._fbServices.getImage(url).subscribe(resp => {
-              console.log('hola' + resp)
+              this.images = [];
+              this.images = this.marker.img;
+              this.img.nombre = url;
               this.img.file = resp;
               this.img.mbProgres = null;
               this.img.mbTotal = null;
-              console.log(this.images)
-              this.images.push(this.img)
-              console.log(this.images)
+              this.images.unshift(this.img)
               this.marker.img = this.images;
               this._fbServices.updateMarker(this.marker);
               
@@ -67,7 +67,7 @@ export class EditmarkerComponent implements OnInit {
               return;
           })
 
-        }, 3000)
+        }, 2000)
       }
 
       

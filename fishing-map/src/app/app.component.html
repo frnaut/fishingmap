@@ -2,7 +2,12 @@
     
     <mat-toolbar color="primary" class="toolbar">
       <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-      <h1 ><a [routerLink]="['/']" >Fishing Map</a></h1>
+      <h1 >
+          <a [routerLink]="['/']" >
+            Fishing Map
+            <mat-icon aria-hidden="false">add_location</mat-icon>
+        </a>
+        </h1>
     </mat-toolbar>
   
     <mat-sidenav-container class="sidenav-container"
@@ -21,7 +26,7 @@
                     <mat-icon class="mr-2" aria-hidden="false">home</mat-icon>
                     Inicio
                 </a>
-                <a mat-list-item [routerLink]="['/']">
+                <a mat-list-item [routerLink]="['search']">
                     <mat-icon class="mr-2" aria-hidden="false">search</mat-icon>
                     Buscar
                 </a>

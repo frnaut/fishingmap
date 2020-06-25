@@ -35,12 +35,14 @@ export class FirebaseService {
   uploadImages(event){
     const file = event.target.files[0]; 
     let name = Date.now()
-    console.log(name);
     return this.storage.upload(`img/${name.toString()}`, file).snapshotChanges();
   }
 
   getImage(url: string){
-    console.log(url)
     return this.storage.ref(url).getDownloadURL();
+  }
+
+  deleteImage(url: string){
+    return this.storage.ref(url).delete();
   }
 }
