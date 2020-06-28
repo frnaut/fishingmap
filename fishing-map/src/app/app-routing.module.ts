@@ -4,13 +4,16 @@ import { MarkerDeatailComponent } from './components/marker-detail/marker-deatai
 import { HomeComponent } from './components/home/home.component';
 import { EditmarkerComponent } from './components/editmarker/editmarker.component';
 import { SearchComponent } from './components/search/search.component';
+import { LoginComponent } from './components/login/login.component';
+import { FirebaseGuard } from './guards/firebase.guard';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'marker/:id', component: MarkerDeatailComponent },
-  { path: 'edit/:id', component: EditmarkerComponent},
-  {path: 'search', component: SearchComponent},
+  { path: 'login', component: LoginComponent},
+  { path: '', component: HomeComponent, canActivate:[FirebaseGuard] },
+  { path: 'marker/:id', component: MarkerDeatailComponent, canActivate:[FirebaseGuard] },
+  { path: 'edit/:id', component: EditmarkerComponent, canActivate:[FirebaseGuard] },
+  { path: 'search', component: SearchComponent, canActivate:[FirebaseGuard] },
   { path: '**', pathMatch: 'full', redirectTo: '' }
 ];
 

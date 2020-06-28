@@ -1,0 +1,58 @@
+<div class="nav-container" [class.mobile]="mobileQuery.matches" *ngIf="shouldRun">
+    
+    <mat-toolbar color="primary" class="toolbar">
+      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      <h1 >
+          <a [routerLink]="['/']" >
+            Fishing Map
+            <mat-icon aria-hidden="false">add_location</mat-icon>
+        </a>
+        </h1>
+    </mat-toolbar>
+  
+    <mat-sidenav-container class="sidenav-container"
+                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+      
+        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+            <mat-nav-list class="px-2">
+                <div *ngIf="user != null">
+                    <div mat-list-item class="text-center ">
+                        <img class="p-img" [src]="user.photoURL" alt="">
+                        <h2 class="p-name">{{ user.displayName }}</h2>
+                        <span>{{ user.email }}</span>
+                    </div>
+                    
+                    <a mat-list-item [routerLink]="['/']">
+                        <mat-icon class="mr-2" aria-hidden="false">home</mat-icon>
+                        Inicio
+                    </a>
+                    <a mat-list-item [routerLink]="['search']">
+                        <mat-icon class="mr-2" aria-hidden="false">search</mat-icon>
+                        Buscar
+                    </a>
+                    <a (click)="logOut()" mat-list-item>
+                        <mat-icon class="mr-2" aria-hidden="false">close</mat-icon>
+                        Cerrar sesion
+                    </a>
+                </div>
+
+                <div *ngIf="user == null">
+                    <div class="alert alert-warning" role="alert">
+                        Por favor inicie sesion para ver el contenido
+                    </div>
+                    <a mat-list-item [routerLink]="['login']">
+                        <mat-icon class="mr-2" aria-hidden="false">login</mat-icon>
+                        Inicie sesion aqui
+                    </a>
+                </div>
+            </mat-nav-list>            
+        </mat-sidenav>
+  
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>      
+      </mat-sidenav-content>
+    
+    </mat-sidenav-container>
+  
+</div>

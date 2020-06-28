@@ -1,41 +1,68 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage  } from '@angular/fire/storage';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
 import { Marker } from '../models/marker.interface';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
 
+  public user: Observable<any>;
+  
   constructor(
     private firestore: AngularFirestore,
-    private storage: AngularFireStorage
-    ) { }
+    private storage: AngularFireStorage,
+    private fireAuth: AngularFireAuth
+    ) { 
+        this.user = fireAuth.user;
+        
+  }
 
+  
+  login(){
+    return this.fireAuth.signInWithPopup(new auth.GoogleAuthProvider()).then(resp =>{
+      localStorage.setItem('idToken', resp.credential['idToken'])
+      localStorage.setItem('email', resp.user.email)
+    })
+  }
+
+  logOut(){
+    localStorage.setItem('idToken', '')
+    return this.fireAuth.signOut();
+  }
+  
   getMarkers(){
-    return this.firestore.collection('map').valueChanges();
+    const email = localStorage.getItem('email');
+    return this.firestore.collection(email).valueChanges();
   }
 
   getMarker(id: string){
-    return this.firestore.collection('map').doc(id).valueChanges();
+    const email = localStorage.getItem('email');
+    return this.firestore.collection(email).doc(id).valueChanges();
   }
 
   addMarkers( marker: Marker ){
-    return this.firestore.collection('map').add(marker).then((resp) =>{
+    const email = localStorage.getItem('email');
+    return this.firestore.collection(email).add(marker).then((resp) =>{
       marker.id = resp.id;
-      this.firestore.collection('map').doc(resp.id).update(marker)
+      this.firestore.collection(email).doc(resp.id).update(marker)
     })
   }
 
   updateMarker(marker: Marker){
-    return this.firestore.collection('map').doc(marker.id).update(marker);
+    const email = localStorage.getItem('email');
+    return this.firestore.collection(email).doc(marker.id).update(marker);
   }
 
   uploadImages(event){
+    const email = localStorage.getItem('email');
     const file = event.target.files[0]; 
     let name = Date.now()
-    return this.storage.upload(`img/${name.toString()}`, file).snapshotChanges();
+    return this.storage.upload(`${email}/img/${name.toString()}`, file).snapshotChanges();
   }
 
   getImage(url: string){
@@ -45,4 +72,5 @@ export class FirebaseService {
   deleteImage(url: string){
     return this.storage.ref(url).delete();
   }
+
 }

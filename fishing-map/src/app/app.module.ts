@@ -1,20 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MapComponent } from './components/map/map.component';
-import { AngularFireModule } from '@angular/fire';
+
 import { FormsModule } from '@angular/forms';
 import { environment } from 'src/environments/environment';
-import { AngularMaterialModule } from './modules/angular-material/angular-material.module';
-import { FirebaseModule } from './modules/firebase/firebase.module';
 
+import { AngularFireModule } from '@angular/fire';
+import { FirebaseModule } from './modules/firebase/firebase.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularMaterialModule } from './modules/angular-material/angular-material.module';
+
+import { AppComponent } from './app.component';
+import { MapComponent } from './components/map/map.component';
 import { MarkerDeatailComponent } from './components/marker-detail/marker-deatail.component';
 import { HomeComponent } from './components/home/home.component';
 import { EditmarkerComponent } from './components/editmarker/editmarker.component';
 import { SearchComponent } from './components/search/search.component';
+import { LoginComponent } from './components/login/login.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
 
 
 
@@ -28,6 +31,8 @@ import { SearchComponent } from './components/search/search.component';
     HomeComponent,
     EditmarkerComponent,
     SearchComponent,
+    LoginComponent,
+    NavbarComponent,
     
   ],
   imports: [
