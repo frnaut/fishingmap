@@ -46,10 +46,12 @@ export class MapComponent implements OnInit {
       marker.addTo(this.map)
       marker.bindPopup(`<a class="btn btn-success text-light" href="/edit/${marker.id}" > Editar </a>
       <a class="btn btn-info text-light" href="/marker/${marker.id}" > Ver </a>
+      <a class="btn btn-danger text-light" href="/delete/${marker.id}"> X </a>
       `)
 
     });
   }
+
 
   newMarker(): void{
   

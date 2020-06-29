@@ -18,6 +18,7 @@ import { EditmarkerComponent } from './components/editmarker/editmarker.componen
 import { SearchComponent } from './components/search/search.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { DeletemarkerComponent } from './components/shared/deletemarker/deletemarker.component';
 
 
 
@@ -33,6 +34,7 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
     SearchComponent,
     LoginComponent,
     NavbarComponent,
+    DeletemarkerComponent,
     
   ],
   imports: [

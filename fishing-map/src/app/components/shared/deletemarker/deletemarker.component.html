@@ -1,0 +1,9 @@
+<div class="mt-5 row justify-content-center align-items-center">
+    <div class="mx-3">
+        <h2 class="text-center">¿Esta seguro que desea eliminar este marcador?</h2>
+        <div class="d-flex justify-content-around">
+            <button class="w-25" (click)="delete()" mat-raised-button color="primary">Si</button>
+            <button [routerLink]="['/']" class="w-25" mat-raised-button color="warn">No</button>
+        </div>
+    </div>
+</div>

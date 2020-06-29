@@ -73,4 +73,9 @@ export class FirebaseService {
     return this.storage.ref(url).delete();
   }
 
+  deleteMarker(id: string){
+    const email = localStorage.getItem('email');
+    return this.firestore.collection(email).doc(id).delete();
+  }
+
 }
